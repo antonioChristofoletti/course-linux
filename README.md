@@ -32,6 +32,13 @@
     - example: `head -n 4 foo.txt`.
 - `less`: It only print some lines of a text file, It is on demand, pressing enter the command show more lines in the terminal;
     - example: `less foo.txt`.
+- `grep`: Used as a filter to find string.
+    - Example: `cat google.txt | grep "Larry Page and Sergey Brin"`.
+- `which`: show the location of execution file.
+    - Example: `which firefox`
+- `wc`: show the quantity of characters in a file
+    - `-l` show quantity of lines, `-c` show quantity of characters, `-w` quantity words
+    - Example: `w -lcw *.txt`
 
 ### Compacting
 
@@ -73,7 +80,7 @@ It is used the same as `gz`, however using the parameter `z`, It is used the par
 - `/`: linux root folder;
 - `~`: user root folder;
 - `.`: current folder;
-- `..`: previous folder;
+- `..`: previous folder;    
 
 ## Bash Terminal WildCards
 
@@ -106,3 +113,67 @@ It is used the same as `gz`, however using the parameter `z`, It is used the par
 - Obs.: 
     - the `x` and `dd` commands allow to define how many characters or lines are gonna be removed, just press the quantity and then the command: `11 + x`;
     - It is possible combine commands, like `wq` (Save and quite).
+
+## Managing Processes
+
+- `ps -e`: show all the processe. `-ef` show more details about each process;
+- `top`: show process and resources consumided by each one;
+- `pstree`: show the process in a tree scheme;
+- `kill pid-number`: terminate a process, requiring to the process itself to close;
+    -`-9`: kill abruptly;
+    -`-TERM`: default param used if no one is passed, It terminate the process properly.
+- `kilall {name}`: Kill all processes according with the name;
+- `process-to-start &`: Start the process already on the background;
+- `jobs`: List the processes associated with the current process (terminal);
+- `ctrl + z`: put the process to sleep and unlock the terminal;
+- `bg`: Send the process to the background;
+    - Example: `bg firefox`.
+- `fg`: send the process to the foreground;
+    - Example: `fg firefox`.
+
+## Managing Files Acess
+
+- Each file has a configuration to the owner, user group and other users. Example: `drwxrwxr-x 8 antonio antonio 4096 Aug 22 14:51 .git`;
+
+`d` represents a directory, if not there will be a `-` for files;
+`rwx` represents the permission access for someone, if It has not a permission It gonna have just a `-`. This pattern It is repeated 3 times, one It is for the owner, the group user and other users.
+
+`chmod`: It is used to change user permission. It has 2 ways to use it;
+    - Symbolic : `chmod [permission type][operation][permission]`;
+        - Example: `chmod u+rwx afile` or `chmod g-w file`.
+    - Numerical: Each operation has a value, read(4), write(2) and execute(1). Each permission group type is gonna have a sum of these values, representing It access;
+        - Example: `chmod 754 file` (owner has all, user group has read and execute and other users has only read).
+
+`chown`: allows to change the owner or the user group;
+    - Examples: `chown user:user-group file` (It is possible edit just the user or the group user).
+
+- `chmod` and `chown` allow -R (Recursive).
+
+- `sudo su`: Change to root user;
+- `su {username}`: change to another user;
+- `passwd`: change the password of the current user, It allows pass the user name too;
+- `sudo adduser {username}`: add a new user;
+
+## Searching for files
+
+- `locate`: Search for a file
+    - Example: `locate chrome`.
+- `sudo updatedb`: the OS tracks all the file's names and keep them in a DB. It is possible to force the update with this command.
+
+## Environment Variables
+
+- `env`: show all the variables.
+    - variables PATH keep all the paths that has executable files. It is possible to edit. Example: ``
+    - It is possible edit these variables on the terminal, however, It just apply for the current terminal. Edit the `.bashrc`
+        - Example editing the `.bashrc`: `PATH:$PATH:/home/anyuser/workspace/modified_scripts/`
+
+## Managing Packages
+
+Apt is a evolution of apt-get, better to use.
+
+- `apt install {package-name}`: install one or more packages;
+- `apt update`: update the repositories's packages references;
+- `apt upgrade`: update installed packages;
+- `apt remove {package-name}`: delete one or more packages;
+- `apt purge {package-name}`: delete and remove all configurations of one or more packages;
+- `apt autoremove`: delete packages not used anymore, especially those installed by other packages, because of dependencies.
