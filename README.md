@@ -39,6 +39,8 @@
 - `wc`: show the quantity of characters in a file
     - `-l` show quantity of lines, `-c` show quantity of characters, `-w` quantity words
     - Example: `w -lcw *.txt`
+- `scp`: Copy a file from localhost to another computer using SSH features, It is considered secure. There are a lot of useful parameters
+    - Example: `scp file ubuntu@1.1.1.1:destiny directory`.
 
 ### Compacting
 
@@ -131,6 +133,33 @@ It is used the same as `gz`, however using the parameter `z`, It is used the par
 - `fg`: send the process to the foreground;
     - Example: `fg firefox`.
 
+### Systemd and Daemons
+
+Systemd: It is a "System Init", in which It manages the processes that need to be started after linux kernel.
+
+Systemctl is a terminal command from Systemd in order to manage the processes. 
+
+system vs systemctl: system is a wrapper command that groups other commands related to processes, It contains the systemctl. Generally using system is better, because It can interact with different "System Init", depending of the GNU/linux distribution.
+
+See below some commands:
+
+- Basic commands to manage and check:
+    - `sudo systemctl start process-name.process`;
+    - `sudo systemctl stop process-name.process`;
+    - `sudo systemctl restart process-name.process`;
+    - `sudo systemctl reload process-name.process`;
+    - `sudo systemctl enable process-name.process`;
+    - `sudo systemctl disable process-name.process`;
+    - `sudo systemctl status process-name.process`;
+    - `sudo systemctl is-active process-name.process`;
+    - `sudo systemctl is-enabled process-name.process`;
+
+- `systemctl list-units`: list all processes(units) some related information;
+- `systemctl` similar to list-units, but show even the stopped ones.
+- `systemctl cat process-name`: show the configuration file for systemd.
+
+This was just a small intruduction, there are more content related to this topic.
+
 ## Managing Files Acess
 
 - Each file has a configuration to the owner, user group and other users. Example: `drwxrwxr-x 8 antonio antonio 4096 Aug 22 14:51 .git`;
@@ -169,6 +198,8 @@ It is used the same as `gz`, however using the parameter `z`, It is used the par
 
 ## Managing Packages
 
+### Apt
+
 Apt is a evolution of apt-get, better to use.
 
 - `apt install {package-name}`: install one or more packages;
@@ -177,3 +208,35 @@ Apt is a evolution of apt-get, better to use.
 - `apt remove {package-name}`: delete one or more packages;
 - `apt purge {package-name}`: delete and remove all configurations of one or more packages;
 - `apt autoremove`: delete packages not used anymore, especially those installed by other packages, because of dependencies.
+
+### Dpkg
+
+Dpkg is an applicationbse for package manegement for linux debian.
+
+Some common commands:
+
+- `sudo dpkg -i app-package-file.deb`: Install a package;
+- `sudo dpkg -r app-package-name.deb`: Uninstall a package (generally have the same name of the installing file name);
+
+### Install by Code
+
+It is basically download the application code and them compile and generally the output files to proceed with the installation.
+
+Of couse, depending of the application the process It is gonna change. Below is an example with `git` package.
+
+1 - Download git:
+    `https://www.kernel.org/pub/software/scm/git/git-2.7.1.tar.gz.
+
+2 - Extract files:
+    `tar zxf git-2.7.1.tar.gz`
+
+3 - Install dependencies and then build the project:
+    `./configure`
+    `sudo apt-get install zlib1g-dev`
+    `sudo make install`
+
+## Remote Access
+
+ssh simples
+ssh -x
+s
